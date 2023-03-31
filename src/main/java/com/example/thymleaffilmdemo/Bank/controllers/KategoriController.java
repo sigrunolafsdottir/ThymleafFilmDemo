@@ -35,14 +35,7 @@ public class KategoriController {
         return "showAllCategories";
     }
 
-    @RequestMapping("/allWithDelete")
-    public String getAllWithDelete(Model model) {
-        Iterable<Kategori> k = kategoriRepo.findAll();
-        model.addAttribute("allCategories", k);
-        model.addAttribute("name", "Kategorinamn");
-        model.addAttribute("categoryTitle", "Alla kategorier");
-        return "deleteCategory";
-    }
+
 
     //servar ett formulär för att skapa en ny kategori
     @RequestMapping("/addByForm")
@@ -55,6 +48,15 @@ public class KategoriController {
     public String create(@RequestParam String name, Model model) {
         kategoriRepo.save(new Kategori(name));
         return getAll(model);
+    }
+
+    @RequestMapping("/allWithDelete")
+    public String getAllWithDelete(Model model) {
+        List<Kategori> k = kategoriRepo.findAll();
+        model.addAttribute("allCategories", k);
+        model.addAttribute("name", "Kategorinamn");
+        model.addAttribute("categoryTitle", "Alla kategorier");
+        return "deleteCategory";
     }
 
     @RequestMapping(path = "/deleteById/{id}")
