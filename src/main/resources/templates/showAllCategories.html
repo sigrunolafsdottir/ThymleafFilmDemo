@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2 th:text="${categoryTitle}"></h2>
+<div class="allCategories" th:unless="${#lists.isEmpty(allCategories)}">
+
+  <table>
+      <th th:text="${name}"></th>
+    <tbody>
+    <tr th:each="cat : ${allCategories}">
+      <td th:text="${cat.name}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</body>
+</html>

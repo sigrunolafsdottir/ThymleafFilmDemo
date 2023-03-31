@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="allCategories" th:unless="${#lists.isEmpty(allCategories)}">
+    <h2 th:text="${categoryTitle}"></h2>
+    <table>
+        <tbody>
+        <tr th:each="cat : ${allCategories}">
+            <td th:text="${cat.name}"></td>
+            <td><a th:href="@{/kategori/deleteById/{id}(id=${cat.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
