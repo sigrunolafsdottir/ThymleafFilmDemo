@@ -29,10 +29,18 @@ public class KategoriController {
     public String getAll(Model model) {
         List<Kategori> k = kategoriRepo.findAll();
         model.addAttribute("allCategories", k);
-        //model.addAttribute("allCategories", new ArrayList<Kategori>());
         model.addAttribute("name", "Kategorinamn");
         model.addAttribute("categoryTitle", "Alla kategorier");
         return "showAllCategories";
+    }
+
+    @RequestMapping("/all2")
+    public String getAll2(Model model) {
+        List<Kategori> k = kategoriRepo.findAll();
+        model.addAttribute("allCategories", k);
+        model.addAttribute("name", "Kategorinamn");
+        model.addAttribute("categoryTitle", "Alla kategorier");
+        return "completeCategory";
     }
 
 
@@ -47,7 +55,8 @@ public class KategoriController {
     @PostMapping("/create")
     public String create(@RequestParam String name, Model model) {
         kategoriRepo.save(new Kategori(name));
-        return getAll(model);
+        //return getAll2(model);
+        return "redirect:/kategori/all2";
     }
 
     @RequestMapping("/allWithDelete")
@@ -63,6 +72,25 @@ public class KategoriController {
     public String deleteCap(@PathVariable Long id, Model model) {
         kategoriRepo.deleteById(id);
         return getAllWithDelete(model);
+    }
+
+
+    @RequestMapping("/editByView/{id}")
+    public String createByForm(@PathVariable Long id, Model model) {
+        System.out.println("hej");
+        Kategori k= kategoriRepo.findById(id).get();
+        model.addAttribute("kategori", k);
+        return "updateCategoryForm";
+    }
+
+    @PostMapping("/update")
+    public String addCustomer(Model model, Kategori c) {
+        kategoriRepo.save(c);
+        List<Kategori> k = kategoriRepo.findAll();
+        model.addAttribute("allCategories", k);
+        model.addAttribute("name", "Kategorinamn");
+        model.addAttribute("categoryTitle", "Alla kategorier");
+        return "completeCategory";
     }
 
 

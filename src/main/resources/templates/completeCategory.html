@@ -13,10 +13,18 @@
         <tr th:each="cat : ${allCategories}">
             <td th:text="${cat.name}"></td>
             <td><a th:href="@{/kategori/deleteById/{id}(id=${cat.id})}">Delete</a></td>
+            <td><a th:href="@{/kategori/editByView/{id}(id=${cat.id})}">Update</a></td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<p></p>
+<form action="#" th:action="@{/kategori/create}" method="post" >
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value=""><br><br>
+    <input type="submit" value="Submit">
+</form>
 
 </body>
 </html>
